@@ -9,10 +9,13 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 import org.viators.practice_project16.eazyschool.annotation.FieldsValueMatch;
 import org.viators.practice_project16.eazyschool.annotation.PasswordValidator;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "persons")
 @FieldsValueMatch.List({
@@ -67,4 +70,8 @@ public class Person extends BaseEntity{
     @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL, targetEntity = Address.class)
     @JoinColumn(name = "address_id", referencedColumnName = "addressId",nullable = true)
     private Address address;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
+    @JoinColumn(name = "class_id", referencedColumnName = "classId", nullable = true)
+    private EazySchoolClass eazySchoolClass;
 }
