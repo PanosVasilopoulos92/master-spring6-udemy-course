@@ -1,4 +1,4 @@
-package org.viators.eazyschool.controller;
+package org.viators.practice_project16.eazyschool.controller;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.viators.eazyschool.model.Person;
+import org.viators.practice_project16.eazyschool.model.Person;
 
 @Slf4j
 @Controller
@@ -17,8 +17,9 @@ public class StudentController {
     @GetMapping("/displayCourses")
     public ModelAndView displayCourses(Model model, HttpSession session) {
         Person person = (Person) session.getAttribute("loggedInPerson");
+        log.info(person.toString());
         ModelAndView modelAndView = new ModelAndView("courses_enrolled.html");
-        modelAndView.addObject("person",person);
+        modelAndView.addObject("person", person);
         return modelAndView;
     }
 }
