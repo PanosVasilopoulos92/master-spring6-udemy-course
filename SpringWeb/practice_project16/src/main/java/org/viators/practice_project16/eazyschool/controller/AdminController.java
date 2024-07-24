@@ -3,6 +3,7 @@ package org.viators.practice_project16.eazyschool.controller;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -108,7 +109,8 @@ public class AdminController {
 
     @GetMapping("/displayCourses")
     public ModelAndView displayCourses(Model model) {
-        List<Course> courses = courseRepository.findAll();
+//        List<Course> courses = courseRepository.getByOrderByName();
+        List<Course> courses = courseRepository.findAll(Sort.by("name").descending()); // dynamic Sorting of results.
         ModelAndView modelAndView = new ModelAndView("courses_secure.html");
         modelAndView.addObject("courses", courses);
         modelAndView.addObject("course", new Course());
