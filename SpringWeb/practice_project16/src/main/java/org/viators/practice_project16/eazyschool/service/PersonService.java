@@ -27,7 +27,7 @@ public class PersonService {
         person.setRoles(role);
         person.setPwd(passwordEncoder.encode(person.getPwd()));
         person = personRepository.save(person);
-        if (null != person && person.getPersonId() > 0)
+        if (person.getPersonId() > 0)
         {
             isSaved = true;
         }
