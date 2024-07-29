@@ -16,7 +16,7 @@ import java.util.List;
 public interface ContactRepository extends JpaRepository<Contact, Integer> {
     List<Contact> findByStatus(String status, Sort sort);
 
-    Page<Contact> findByStatus(String status, Pageable pageable);
+    Page<Contact> getByStatus(String status, Pageable pageable);
 
     List<Contact> getByOrderByName();
 

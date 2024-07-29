@@ -1,6 +1,7 @@
 package org.viators.practice_project16.eazyschool.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -56,11 +57,13 @@ public class Person extends BaseEntity {
     @NotBlank(message = "Password must not be blank")
     @Size(min = 5, message = "Password must be at least 5 characters long")
     @PasswordValidator
+    @JsonIgnore
     private String pwd;
 
     @NotBlank(message = "Confirm Password must not be blank")
     @Size(min = 5, message = "Confirm Password must be at least 5 characters long")
     @Transient
+    @JsonIgnore
     private String confirmPwd;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, targetEntity = Roles.class)

@@ -19,7 +19,8 @@ import org.viators.practice_project16.eazyschool.model.Profile;
 import org.viators.practice_project16.eazyschool.repository.PersonRepository;
 
 @Slf4j
-@Controller
+@Controller(value = "userProfileController")
+@RequestMapping(name = "/profile")
 public class ProfileController {
 
     @Autowired
@@ -51,13 +52,16 @@ public class ProfileController {
         if(errors.hasErrors()){
             return "profile.html";
         }
+
         Person person = (Person) session.getAttribute("loggedInPerson");
         person.setName(profile.getName());
         person.setEmail(profile.getEmail());
         person.setMobileNumber(profile.getMobileNumber());
+
         if(person.getAddress() ==null || !(person.getAddress().getAddressId()>0)){
             person.setAddress(new Address());
         }
+
         person.getAddress().setAddress1(profile.getAddress1());
         person.getAddress().setAddress2(profile.getAddress2());
         person.getAddress().setCity(profile.getCity());
@@ -65,6 +69,7 @@ public class ProfileController {
         person.getAddress().setZipCode(profile.getZipCode());
         Person savedPerson = personRepository.save(person);
         session.setAttribute("loggedInPerson", savedPerson);
+
         return "redirect:/displayProfile";
     }
 }
