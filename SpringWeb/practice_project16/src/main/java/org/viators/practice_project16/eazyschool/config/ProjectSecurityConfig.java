@@ -17,17 +17,20 @@ public class ProjectSecurityConfig {
         http.csrf((csrf) -> csrf.ignoringRequestMatchers("/saveMsg")
                         .ignoringRequestMatchers("/public/**")
                         .ignoringRequestMatchers("/api/**")
-                        .ignoringRequestMatchers("/data-api/**"))
+                        .ignoringRequestMatchers("/data-api/**")
+                        .ignoringRequestMatchers("/eazyschool/actuator/**"))
                 .authorizeHttpRequests((requests) -> requests.requestMatchers("/dashboard").authenticated()
                         .requestMatchers("/displayMessages/**").hasRole("ADMIN")
                         .requestMatchers("/closeMsg/**").hasRole("ADMIN")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/eazyschool/actuator/**").hasRole("ADMIN")
+//                        .requestMatchers("/actuator/**").hasRole("ADMIN")
                         .requestMatchers("/student/**").hasRole("STUDENT")
                         .requestMatchers("/data-api/**").authenticated()
                         .requestMatchers("/displayProfile").authenticated()
                         .requestMatchers("/updateProfile").authenticated()
-                        .requestMatchers("/", "/home").permitAll()
                         .requestMatchers("/api/**").authenticated()
+                        .requestMatchers("/", "/home").permitAll()
                         .requestMatchers("/holidays/**").permitAll()
 //                        .requestMatchers("/data-api/**").permitAll()
 //                        .requestMatchers("/explorer/**").permitAll()
@@ -53,5 +56,12 @@ public class ProjectSecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+//    @Bean
+//    public Dotenv dotenv(){
+//        Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
+//        System.out.println("Database URL: " + dotenv.get("DATABASE_URL"));
+//        return dotenv;
+//    }
 
 }

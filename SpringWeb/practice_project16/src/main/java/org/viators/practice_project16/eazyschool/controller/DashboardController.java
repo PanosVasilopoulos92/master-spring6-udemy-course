@@ -18,6 +18,12 @@ public class DashboardController {
     @Autowired
     PersonRepository personRepository;
 
+//    @Value("${eazyschool.pageSize}")
+//    private int defaultPageSize;
+//
+//    @Value("${eazyschool.contact.successMsg}")
+//    private String message;
+
     @RequestMapping("/dashboard")
     public String displayDashboard(Model model,Authentication authentication, HttpSession session) {
         Person person = personRepository.readByEmail(authentication.getName());
